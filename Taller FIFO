@@ -1,0 +1,69 @@
+#include <iostream>
+#include <queue>
+#include <string>
+
+using namespace std;
+queue<string> pacientes;
+
+void RegistrarPaciente() {
+    cout << "Ingrese el nombre del paciente: ";
+    string nombre;
+    getline(cin, nombre);
+
+    cout << "Ingrese el número de documento: ";
+    string documento;
+    getline(cin, documento);
+
+    string pacienteInfo = nombre + " - " + documento;
+    pacientes.push(pacienteInfo);
+
+    cout << "Paciente registrado exitosamente." << endl;
+}
+
+void MostrarPacientes() {
+    if (pacientes.empty()) {
+        cout << "No hay pacientes registrados." << endl;
+        return;
+    }
+
+    cout << "Pacientes registrados:" << endl;
+
+    int i = 1;
+    queue<string> temp = pacientes;
+    while (!temp.empty()) {
+        cout << i << ". " << temp.front() << endl;
+        temp.pop();
+        i++;
+    }
+}
+
+int main() {
+    while (true) {
+        cout << "1. Registrar paciente" << endl;
+        cout << "2. Mostrar pacientes" << endl;
+        cout << "3. Salir" << endl;
+
+        int opcion;
+        cin >> opcion;
+        cin.ignore(); // Limpiar el buffer de entrada
+
+        switch (opcion) {
+            case 1:
+                RegistrarPaciente();
+                break;
+
+            case 2:
+                MostrarPacientes();
+                break;
+
+            case 3:
+                return 0;
+
+            default:
+                cout << "Opción no válida. Inténtalo de nuevo." << endl;
+                break;
+        }
+    }
+
+    return 0;
+}
